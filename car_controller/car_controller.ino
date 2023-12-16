@@ -129,7 +129,7 @@ RD.setSpeed(200);
 
 
 
-
+//basic movements with standered input
 void basic_movement()
 {
   LT.setSpeed(255);
@@ -184,7 +184,7 @@ RD.setSpeed(255);
 
 // }
 
-
+//used in actual_move() to make it organised
 void speed(int amount, AF_DCMotor motor)
 {
   if (amount >0 )
@@ -192,7 +192,7 @@ void speed(int amount, AF_DCMotor motor)
 
 
      motor.setSpeed(motor_speed *map(amount,0,100,0,255));
-    motor.run(state);
+    motor.run(m_state);
    // m_state = 1;
  // return map(percentage,0,100,0,255);
   }
@@ -210,6 +210,8 @@ float xRD;
 float xRT;
 float xLT;
 float xLD;
+
+//making  the settings for motors for the desired movement 
 void move()
 {
 
@@ -239,50 +241,52 @@ void move()
   //define the algorithm to add power or decreese power to simulate the turn
   // if(angle_diffrence >= -error && angle_diffrence <= error)
   // angle_diffrence = 0;
-    xLD = 100;
-  xLT = 100;
+
     xRD = 100;
   xRT = 100;
+        xLD = 100;
+  xLT = 100;
   if(angleofinput < 90 && angleofinput>=0)
   {
- x = map (angleofinput, 0,90,0,100);
+ x = map (angleofinput, 0,90,100,0);
   dir = "right";
   xRD = x;
   xRT = x;
-  state = 1;
+
+  m_state = 1;
   }
  else if(angleofinput < 180 && angleofinput>=90)
   {
- x = map (angleofinput, 90 ,180 ,0,100);
+ x = map (angleofinput, 90 ,180 ,100,0);
 dir = "right";
   xRD = x;
   xRT = x;
-state = 2;
+ m_state = 2;
 }
 
 
 else  if(angleofinput < 360 && angleofinput >=270)
 {
- x = map (angleofinput, 270,360,0,100);
+ x = map (angleofinput, 270,360,100,0);
 dir = "left";
   xLD = x;
   xLT = x;
-state = 1;
+ m_state = 1;
 }
 else  if(angleofinput < 270 &&angleofinput >=180)
 {
- x = map (angleofinput, 180,270,0,100);
+ x = map (angleofinput, 180,270,100,0);
 dir = "left";
   xLD = x;
   xLT = x;
-state = 2;
+ m_state = 2;
 
 }
 //add_or_decrease(x  / 100 );
 
 }
 
-
+//changing the actual motor speed
 void actual_move()
 {
  //while (angledeffrence != 0)
@@ -298,21 +302,22 @@ void actual_move()
   // LD.run(m_state);
   
 }
-int calltheread()
-{
-   //if (Serial.available()) {
-   // char c = Serial.read();
-    processChar(read);
+// int calltheread()
+// {
+//    //if (Serial.available()) {
+//    // char c = Serial.read();
+//     processChar(read);
 
    
-      if(debug)
-      Serial.println("the angle read is " + avalue.toInt());
-      return angleofinput;
+//       if(debug)
+//       Serial.println("the angle read is " + avalue.toInt());
+//       return angleofinput;
     
-  //}
-}
-
+//   //}
+// }
+//for reading angle of input from bluetooth
 void processChar(char c) {
+  
   switch (state) {
     case WAITING_FOR_R:
       if (c == 'R') {
@@ -371,10 +376,7 @@ void processChar(char c) {
       break;
   }
 }
-void read_angle_from_blutooth()
-{
-  //add the code here to read angle from blutooth
-}
+
 
 
 
@@ -416,10 +418,7 @@ if(debug)
 //   move(input_angle);
 //   }
 // actual_move();
-if(control == analog)
-{
-actual_move();
-}
+
 if(Serial.available())
 {
   read = Serial.read();
