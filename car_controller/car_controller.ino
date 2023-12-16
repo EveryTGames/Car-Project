@@ -257,7 +257,7 @@ void move()
   }
  else if(angleofinput < 180 && angleofinput>=90)
   {
- x = map (angleofinput, 90 ,180 ,100,0);
+ x = map (angleofinput, 90 ,180 ,0,100);
 dir = "right";
   xRD = x;
   xRT = x;
@@ -267,7 +267,7 @@ dir = "right";
 
 else  if(angleofinput < 360 && angleofinput >=270)
 {
- x = map (angleofinput, 270,360,100,0);
+ x = map (angleofinput, 270,360,0,100);
 dir = "left";
   xLD = x;
   xLT = x;
