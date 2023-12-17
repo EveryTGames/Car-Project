@@ -138,35 +138,70 @@ RT.setSpeed(255);
 RD.setSpeed(255);
   switch (read)
   {
+    case '9':
+    m_state = 1;
+      speed(100,LT);
+      speed(100,LD);
+      speed(50,RT);
+      speed(50,RD);
+      break;
+      case '7':
+    m_state = 1;
+      speed(50,LT);
+      speed(50,LD);
+      speed(100,RT);
+      speed(100,RD);
+      break;
+      case '3':
+    m_state = 2;
+      speed(100,LT);
+      speed(100,LD);
+      speed(50,RT);
+      speed(50,RD);
+      break;
+      case '1':
+    m_state = 2;
+      speed(50,LT);
+      speed(50,LD);
+      speed(100,RT);
+      speed(100,RD);
+      break;
     case '8':
-      LT.run(FORWARD);
-      LD.run(FORWARD);
-      RT.run(FORWARD);
-      RD.run(FORWARD);
+    m_state = 1;
+      speed(100,LT);
+      speed(100,LD);
+      speed(100,RT);
+      speed(100,RD);
       break;
     case '2':
-      LT.run(BACKWARD);
-      LD.run(BACKWARD);
-      RT.run(BACKWARD);
-      RD.run(BACKWARD);
+        m_state = 2;
+      speed(100,LT);
+      speed(100,LD);
+      speed(100,RT);
+      speed(100,RD);
       break;
     case '4':
-      LT.run(RELEASE);
-      LD.run(RELEASE);
-      RT.run(FORWARD);
-      RD.run(FORWARD);
+
+       m_state = 1;
+      speed(0,LT);
+      speed(0,LD);
+      speed(100,RT);
+      speed(100,RD);
       break;
     case '6':
-      LT.run(FORWARD);
-      LD.run(FORWARD);
-      RT.run(RELEASE);
-      RD.run(RELEASE);
+
+       m_state = 1;
+      speed(100,LT);
+      speed(100,LD);
+      speed(0,RT);
+      speed(0,RD);
       break;
       default :
-      LT.run(RELEASE);
-      LD.run(RELEASE);
-      RT.run(RELEASE);
-      RD.run(RELEASE);
+   m_state = 1;
+      speed(0,LT);
+      speed(0,LD);
+      speed(0,RT);
+      speed(0,RD);
       break;
       
   }
