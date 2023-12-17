@@ -63,7 +63,7 @@ int RTSPEED = 70;
 int RDSPEED = 70;
 int LTSPEED = 70;
 int LDSPEED = 70;
-int motor_speed = 100;//get it from the bluetooth
+float motor_speed = 100;//get it from the bluetooth
 
 
 bool debug = false;
@@ -191,7 +191,7 @@ void speed(int amount, AF_DCMotor motor)
   {
 
 
-     motor.setSpeed(motor_speed *map(amount,0,100,0,255));
+     motor.setSpeed((motor_speed/100) *map(amount,0,100,0,255));
     motor.run(m_state);
    // m_state = 1;
  // return map(percentage,0,100,0,255);
@@ -254,6 +254,7 @@ void move()
   xRT = x;
 
   m_state = 1;
+
   }
  else if(angleofinput < 180 && angleofinput>=90)
   {
@@ -437,16 +438,9 @@ else if(read == 'u')
   {}
  // char read2 = Serial.read();
   motor_speed = Serial.readString().toInt();
-    Serial.println("motor speed is done and se t to " + motor_speed);
-    while(!Serial.available())
-    {}
-  motor_speed = Serial.readString().toInt();
-    Serial.println(motor_speed);
-    while(!Serial.available())
-  {}
-   error = Serial.readString().toInt();
+    Serial.println("motor speed is done and se t to ");
+        Serial.println(motor_speed);
 
-  Serial.println(error);
  
  
   while(!Serial.available())
