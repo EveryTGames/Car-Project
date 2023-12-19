@@ -8,7 +8,7 @@
 unsigned long timer = 0;
 
 
-
+bool flipp = false;
 
 
 enum State {
@@ -93,7 +93,7 @@ LT.setSpeed(200);
 LD.setSpeed(200);
 RT.setSpeed(200);
 RD.setSpeed(200);
- 
+
   LT.run(RELEASE);
   LD.run(RELEASE);
   RT.run(RELEASE);
@@ -102,10 +102,10 @@ RD.setSpeed(200);
 
 
 
-   
+
 
   // Calibration
-  
+
   // Serial.println("=====================================");
   // Serial.println("Starting calibration...");
   // mpu.Calibrate();
@@ -121,12 +121,38 @@ RD.setSpeed(200);
 
 
 
- 
+
   }
 
 
-  
 
+//used in actual_move() to make it organised
+void speed(int amount, AF_DCMotor motor)
+{
+  if (amount >0 )
+  {
+
+
+     motor.setSpeed((motor_speed/100) *map(amount,0,100,0,255));
+        if(flipp)
+        {
+        if(m_state == 1)
+        m_state == 2;
+        else if(m_state == 2)
+ m_state = 1;
+            }
+            
+           motor.run(m_state);
+   // m_state = 1;
+ // return map(percentage,0,100,0,255);
+  }
+  else
+  {
+    motor.run(4);
+  }
+
+
+}
 
 
 //basic movements with standered input
@@ -203,7 +229,7 @@ RD.setSpeed(255);
       speed(0,RT);
       speed(0,RD);
       break;
-      
+
   }
 }
 
@@ -219,25 +245,7 @@ RD.setSpeed(255);
 
 // }
 
-//used in actual_move() to make it organised
-void speed(int amount, AF_DCMotor motor)
-{
-  if (amount >0 )
-  {
 
-
-     motor.setSpeed((motor_speed/100) *map(amount,0,100,0,255));
-    motor.run(m_state);
-   // m_state = 1;
- // return map(percentage,0,100,0,255);
-  }
-  else
-  {
-    motor.run(4);
-  }
-
-  
-}
 String dir; 
 int error = 5;
 float x;
@@ -251,11 +259,11 @@ void move()
 {
 
 // current_angle = readcurrentangle();
- 
+
 
   // if(angle <= 90 && angle >= -90 )
   // {
-    
+
   //   m_state = 1; //forward
 
 
@@ -266,7 +274,7 @@ void move()
   // }
 //   if(current_angle < 0)
 //   current_angle = current_angle + 360;
- 
+
 //  Serial.println(current_angle);
 
 //angle_diffrence = angleofinput - current_angle; //angle diffrence is the input for pid loop
@@ -336,7 +344,7 @@ void actual_move()
   // RD.run(m_state);
   // LT.run(m_state);
   // LD.run(m_state);
-  
+
 }
 // int calltheread()
 // {
@@ -344,16 +352,16 @@ void actual_move()
 //    // char c = Serial.read();
 //     processChar(read);
 
-   
+
 //       if(debug)
 //       Serial.println("the angle read is " + avalue.toInt());
 //       return angleofinput;
-    
+
 //   //}
 // }
 //for reading angle of input from bluetooth
 void processChar(char c) {
-  
+
   switch (state) {
     case WAITING_FOR_R:
       if (c == 'R') {
@@ -435,7 +443,7 @@ if(debug)
   Serial.println(xLT );
   Serial.println(xLD );
 
-  
+
 
 }
 
@@ -476,8 +484,8 @@ else if(read == 'u')
     Serial.println("motor speed is done and se t to ");
         Serial.println(motor_speed);
 
- 
- 
+
+
   while(!Serial.available())
   {}
 
@@ -502,11 +510,40 @@ else if(read == 'p')
 
 //Serial.println(readcurrentangle());
 }
-
-
+        else if(read = 'r')
+        {
+            RT.setSpeed(255);
+            RT.run(1);
+              RT.setSpeed(255);
+            RD.run(1);
+              RT.setSpeed(255);
+            LT.run(2);
+              RT.setSpeed(255);
+            LD.run(2);
+        
+        }
+        
+else if(read = 'y')
+        {
+            RT.setSpeed(255);
+            RT.run(2);
+              RT.setSpeed(255);
+            RD.run(2);
+              RT.setSpeed(255);
+            LT.run(1);
+              RT.setSpeed(255);
+            LD.run(1);
+        
+        }
+        else if (read = 'f')
+{
+            flipp = true;
+            
+        }
 switch(control)
 {
   case basic:
+            
 basic_movement();
 
 break;
