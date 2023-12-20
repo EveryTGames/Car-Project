@@ -93,7 +93,7 @@ LT.setSpeed(200);
 LD.setSpeed(200);
 RT.setSpeed(200);
 RD.setSpeed(200);
-
+ 
   LT.run(RELEASE);
   LD.run(RELEASE);
   RT.run(RELEASE);
@@ -102,10 +102,10 @@ RD.setSpeed(200);
 
 
 
-
+   
 
   // Calibration
-
+  
   // Serial.println("=====================================");
   // Serial.println("Starting calibration...");
   // mpu.Calibrate();
@@ -121,91 +121,109 @@ RD.setSpeed(200);
 
 
 
-
+ 
   }
 
 
-
-//used in actual_move() to make it organised
-void speed(int amount, AF_DCMotor motor)
-{
-    
-         
-  if (amount >0 )
-  {
+  
 
 
-     motor.setSpeed((motor_speed/100) *map(amount,0,100,0,255));
-    /*    if(flipp)
-        {
-            
-        if(m_state == 1)
-        m_state == 2;
-        else if(m_state == 2)
- m_state = 1;
-            }
-        */
-             
-         
-           motor.run(m_state);
-   // m_state = 1;
- // return map(percentage,0,100,0,255);
-  }
-  else
-  {
-    motor.run(4);
-  }
 
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //basic movements with standered input
 void basic_movement()
 {
-    LT.setSpeed(255);
+  LT.setSpeed(255);
 LD.setSpeed(255);
 RT.setSpeed(255);
 RD.setSpeed(255);
+
+
   switch (read)
   {
+    case 'r':
+        RT.setSpeed(255);
+            RT.run(1);
+            RD.setSpeed(255);
+            RD.run(1);
+            LT.setSpeed(255);
+            LT.run(2);
+            LD.setSpeed(255);
+            LD.run(2);
+            break;
+    case 'y' :
+    RT.setSpeed(255);
+            RT.run(2);
+            RD.setSpeed(255);
+            RD.run(2);
+            LT.setSpeed(255);
+            LT.run(1);
+            LD.setSpeed(255);
+            LD.run(1);
+  break;
     case '9':
-    m_state = 1;
+    m_state = (flipp)?2:1;
       speed(100,LT);
       speed(100,LD);
       speed(50,RT);
       speed(50,RD);
       break;
       case '7':
-    m_state = 1;
+    m_state = (flipp)?2:1;
       speed(50,LT);
       speed(50,LD);
       speed(100,RT);
       speed(100,RD);
       break;
       case '3':
-    m_state = 2;
+    m_state = (flipp)?1:2;
       speed(100,LT);
       speed(100,LD);
       speed(50,RT);
       speed(50,RD);
       break;
       case '1':
-    m_state = 2;
+    m_state = (flipp)?1:2;
       speed(50,LT);
       speed(50,LD);
       speed(100,RT);
       speed(100,RD);
       break;
     case '8':
-    m_state = 1;
+    m_state = (flipp)?2:1;
       speed(100,LT);
       speed(100,LD);
       speed(100,RT);
       speed(100,RD);
       break;
     case '2':
-        m_state = 2;
+        m_state = (flipp)?1:2;
       speed(100,LT);
       speed(100,LD);
       speed(100,RT);
@@ -213,7 +231,7 @@ RD.setSpeed(255);
       break;
     case '4':
 
-       m_state = 1;
+       m_state = (flipp)?2:1;
       speed(0,LT);
       speed(0,LD);
       speed(100,RT);
@@ -221,7 +239,7 @@ RD.setSpeed(255);
       break;
     case '6':
 
-       m_state = 1;
+       m_state = (flipp)?2:1;
       speed(100,LT);
       speed(100,LD);
       speed(0,RT);
@@ -233,9 +251,8 @@ RD.setSpeed(255);
       speed(0,LD);
       speed(0,RT);
       speed(0,RD);
-        
-              break;
-
+      break;
+      
   }
 }
 
@@ -251,7 +268,25 @@ RD.setSpeed(255);
 
 // }
 
+//used in actual_move() to make it organised
+void speed(int amount, AF_DCMotor motor)
+{
+  if (amount >0 )
+  {
 
+
+     motor.setSpeed((motor_speed/100) *map(amount,0,100,0,255));
+    motor.run(m_state);
+   // m_state = 1;
+ // return map(percentage,0,100,0,255);
+  }
+  else
+  {
+    motor.run(4);
+  }
+
+  
+}
 String dir; 
 int error = 5;
 float x;
@@ -265,11 +300,11 @@ void move()
 {
 
 // current_angle = readcurrentangle();
-
+ 
 
   // if(angle <= 90 && angle >= -90 )
   // {
-
+    
   //   m_state = 1; //forward
 
 
@@ -280,7 +315,7 @@ void move()
   // }
 //   if(current_angle < 0)
 //   current_angle = current_angle + 360;
-
+ 
 //  Serial.println(current_angle);
 
 //angle_diffrence = angleofinput - current_angle; //angle diffrence is the input for pid loop
@@ -350,7 +385,7 @@ void actual_move()
   // RD.run(m_state);
   // LT.run(m_state);
   // LD.run(m_state);
-
+  
 }
 // int calltheread()
 // {
@@ -358,16 +393,16 @@ void actual_move()
 //    // char c = Serial.read();
 //     processChar(read);
 
-
+   
 //       if(debug)
 //       Serial.println("the angle read is " + avalue.toInt());
 //       return angleofinput;
-
+    
 //   //}
 // }
 //for reading angle of input from bluetooth
 void processChar(char c) {
-
+  
   switch (state) {
     case WAITING_FOR_R:
       if (c == 'R') {
@@ -449,7 +484,7 @@ if(debug)
   Serial.println(xLT );
   Serial.println(xLD );
 
-
+  
 
 }
 
@@ -490,8 +525,8 @@ else if(read == 'u')
     Serial.println("motor speed is done and se t to ");
         Serial.println(motor_speed);
 
-
-
+ 
+ 
   while(!Serial.available())
   {}
 
@@ -516,41 +551,54 @@ else if(read == 'p')
 
 //Serial.println(readcurrentangle());
 }
-        else if(read = 'r')
-        {
-            RT.setSpeed(255);
-            RT.run(1);
-              RT.setSpeed(255);
-            RD.run(1);
-              RT.setSpeed(255);
-            LT.run(2);
-              RT.setSpeed(255);
-            LD.run(2);
-        
-        }
-        
-else if(read = 'y')
-        {
-            RT.setSpeed(255);
-            RT.run(2);
-              RT.setSpeed(255);
-            RD.run(2);
-              RT.setSpeed(255);
-            LT.run(1);
-              RT.setSpeed(255);
-            LD.run(1);
-        
-        }
-        else if (read = 'f')
+
+  else if (read == 'f')
 {
+  if (flipp)
+  {
+
+  
+            flipp = false;
+            Serial.println("false");
+  }
+            else 
+   {
+
             flipp = true;
-            
+            Serial.println("true");
+   }    
         }
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 switch(control)
 {
   case basic:
-            
+
 basic_movement();
 
 break;
@@ -559,13 +607,13 @@ processChar(read);
 actual_move();
 break;
 }
-}
-}
+
+}//end of firts
 //if(status == 0)
 //Serial.println(readcurrentangle());
 
 
-
+}//end of loop
 
 // float readcurrentangle()
 // {
