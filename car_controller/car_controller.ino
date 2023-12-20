@@ -516,12 +516,12 @@ actual_move();
 break;
 }
 
-}
+}//end of firts
 //if(status == 0)
 //Serial.println(readcurrentangle());
 
 
-}
+}//end of loop
 
 // float readcurrentangle()
 // {
