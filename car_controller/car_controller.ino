@@ -129,19 +129,24 @@ RD.setSpeed(200);
 //used in actual_move() to make it organised
 void speed(int amount, AF_DCMotor motor)
 {
+    
+         
   if (amount >0 )
   {
 
 
      motor.setSpeed((motor_speed/100) *map(amount,0,100,0,255));
-        if(flipp)
+    /*    if(flipp)
         {
+            
         if(m_state == 1)
         m_state == 2;
         else if(m_state == 2)
  m_state = 1;
             }
-            
+        */
+             
+         
            motor.run(m_state);
    // m_state = 1;
  // return map(percentage,0,100,0,255);
@@ -158,7 +163,7 @@ void speed(int amount, AF_DCMotor motor)
 //basic movements with standered input
 void basic_movement()
 {
-  LT.setSpeed(255);
+    LT.setSpeed(255);
 LD.setSpeed(255);
 RT.setSpeed(255);
 RD.setSpeed(255);
@@ -228,7 +233,8 @@ RD.setSpeed(255);
       speed(0,LD);
       speed(0,RT);
       speed(0,RD);
-      break;
+        
+              break;
 
   }
 }
@@ -540,6 +546,7 @@ else if(read = 'y')
             flipp = true;
             
         }
+        
 switch(control)
 {
   case basic:
@@ -552,13 +559,13 @@ processChar(read);
 actual_move();
 break;
 }
-
-}//end of firts
+}
+}
 //if(status == 0)
 //Serial.println(readcurrentangle());
 
 
-}//end of loop
+
 
 // float readcurrentangle()
 // {
