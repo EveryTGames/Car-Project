@@ -18,9 +18,9 @@ V3, added the flipp button and the analog controller (but not going to a fixed a
 The 3D model and the source code is available on this page 
 
 
-We used Arduino uno R3 and L293d motor driver shield and 12v battary with 1800 mAH and it lasted well with recharging it betweeen the matchs( although it wasnt empty, just to make it fully charged )
-And yellow Lg geared motors (4) and normal wheels 
-We didnt use the machnume wheels as i think it will give us less power to the front and the game theme needs more power 
-And also it is easier to break
+We used Arduino uno R3 and L293d motor driver shield and 12v battary with 1800 mAH and it lasted well with recharging it betweeen the matchs( although it wasn't empty, just to make it fully charged )
+And yellow Lg geared motors (4 of them) and normal wheels 
+We didnt use the mecanum wheels as i think it will give us less power to the front and the game theme needs more power 
+And also it is easier to break.
 -----------------------------------------------------------------------------------------
-made by Raze team the 2nd rank in 2023 robo soccer competition organised by Mansoura Engineering College.
+made by Raze team the 2nd rank in 2023 robo soccer competition organized by Mansoura Engineering College.
