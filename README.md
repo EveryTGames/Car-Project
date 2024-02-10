@@ -22,5 +22,6 @@ We used Arduino uno R3 and L293d motor driver shield and 12v battary with 1800 m
 And yellow Lg geared motors (4 of them) and normal wheels 
 We didnt use the mecanum wheels as i think it will give us less power to the front and the game theme needs more power 
 And also it is easier to break.
+
 -----------------------------------------------------------------------------------------
-made by Raze team the 2nd rank in 2023 robo soccer competition organized by Mansoura Engineering College.
+made by Raze team the 2nd rank winner in 2023 robo soccer competition organized by Mansoura Engineering College.
